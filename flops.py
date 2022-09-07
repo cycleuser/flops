@@ -1,4 +1,4 @@
-#!/usr/local/bin/python2.5
+#!/usr/local/bin/python
 
 #/*****************************/
 #/*          flops.c          */
@@ -111,7 +111,7 @@ def main():
 #double TLimit;                   /* Threshold to determine Number of    */
 #				 /* Loops to run. Fixed at 15.0 seconds.*/
 
-   T = [0.0 for x in xrange(36)]
+   T = [0.0 for x in range(36)]
 #double T[36];                    /* Global Array used to hold timing    */
 #				 /* results and other information.      */
 
@@ -213,7 +213,7 @@ def main():
       w = one 
 
       dtime(TimeArray)
-      for i in xrange(1,n):
+      for i in range(1,n):
          v = v + w
          u = v * x
          s = s + (D1+u*(D2+u*D3))/(w+u*(D1+u*(E2+u*E3)))
@@ -231,7 +231,7 @@ def main():
 #/* Estimate nulltime ('for' loop time). */
 #/****************************************/
    dtime(TimeArray)
-   for i in xrange(1, n):
+   for i in range(1, n):
       pass
    dtime(TimeArray)
    nulltime = T[1] * TimeArray[1]
@@ -246,15 +246,14 @@ def main():
    T[3] = T[2] / 14.0#                             /*********************/
    sa = x * ( sa + sb + two * s ) / two#           /* Module 1 Results. */
    sb = one / sa#                                  /*********************/
-   n  = long( ( 40000 * sb ) / scale )
+   n  = int( ( 40000 * sb ) / scale )
    sc = sb - 25.2
    T[4] = one / T[3]
 #						   /********************/
 #						   /*  DO NOT REMOVE   */
 #						   /*  THIS PRINTOUT!  */
-#						   /********************/
 #//   printf("     1   %13.4le  %10.4lf  %10.4lf\n",sc,T[2],T[4])
-   print "     1   %13.4e  %10.4f  %10.4f\n" % (sc,T[2],T[4])
+   print ("     1   %13.4e  %10.4f  %10.4f\n" % (sc,T[2],T[4]))
 
    m = n
 
@@ -271,7 +270,7 @@ def main():
    sa = -one#                                       /* Loop 2.          */
 #						   /********************/
    dtime(TimeArray)
-   for i in xrange(1, m+1):
+   for i in range(1, m+1):
       s  = -s
       sa = sa + s
    dtime(TimeArray)
@@ -287,7 +286,7 @@ def main():
    x = 0.0
 
    dtime(TimeArray)
-   for i in xrange(1, m+1):
+   for i in range(1, m+1):
       s  = -s
       sa = sa + s
       u  = u + two
@@ -298,7 +297,7 @@ def main():
    T[6] = T[1] * TimeArray[1]
 
    T[7] = ( T[6] - T[5] ) / 7.0#                   /*********************/
-   m  = long( sa * x  / sc )#                    /*  PI Results       */
+   m  = int( sa * x  / sc )#                    /*  PI Results       */
    sa = four * w / five#                           /*********************/
    sb = sa + five / v
    sc = 31.25
@@ -309,7 +308,7 @@ def main():
 #						  /*   DO NOT REMOVE   */
 #						  /*   THIS PRINTOUT!  */
 #						  /*********************/
-   print "     2   %13.4e  %10.4f  %10.4f\n" % (pierr,T[6]-T[5],T[8])
+   print ("     2   %13.4e  %10.4f  %10.4f\n" % (pierr,T[6]-T[5],T[8]))
 
 #/*******************************************************/
 #/* Module 3.  Calculate integral of sin(x) from 0.0 to */
@@ -325,7 +324,7 @@ def main():
    v = 0.0#                                        /*********************/
 
    dtime(TimeArray)
-   for i in xrange(1, m):
+   for i in range(1, m):
       v = v + one
       u = v * x
       w = u * u
@@ -346,7 +345,7 @@ def main():
 #						  /*   DO NOT REMOVE   */
 #						  /*   THIS PRINTOUT!  */
 #						  /*********************/
-   print "     3   %13.4e  %10.4f  %10.4f\n" % (sc,T[9],T[11])
+   print ("     3   %13.4e  %10.4f  %10.4f\n" % (sc,T[9],T[11]))
 
 #/************************************************************/
 #/* Module 4.  Calculate Integral of cos(x) from 0.0 to PI/3 */
@@ -363,7 +362,7 @@ def main():
    v = 0.0#                                        /*********************/
 
    dtime(TimeArray)
-   for i in xrange(1, m):
+   for i in range(1, m):
       u = i * x
       w = u * u
       s = s + w*(w*(w*(w*(w*(B6*w+B5)+B4)+B3)+B2)+B1)+one
@@ -385,7 +384,7 @@ def main():
 #						  /*   DO NOT REMOVE   */
 #						  /*   THIS PRINTOUT!  */
 #						  /*********************/
-   print "     4   %13.4e  %10.4f  %10.4f\n" % (sc,T[12],T[14])
+   print ("     4   %13.4e  %10.4f  %10.4f\n" % (sc,T[12],T[14]))
 
 #/************************************************************/
 #/* Module 5.  Calculate Integral of tan(x) from 0.0 to PI/3 */
@@ -401,7 +400,7 @@ def main():
    v = 0.0#                                        /*********************/
 
    dtime(TimeArray)
-   for i in xrange(1, m):
+   for i in range(1, m):
       u = i * x
       w = u * u
       v = u * ((((((A6*w+A5)*w+A4)*w+A3)*w+A2)*w+A1)*w+one)
@@ -424,7 +423,7 @@ def main():
 #						  /*   DO NOT REMOVE   */
 #						  /*   THIS PRINTOUT!  */
 #						  /*********************/
-   print "     5   %13.4e  %10.4f  %10.4f\n" % (sc,T[15],T[17])
+   print ("     5   %13.4e  %10.4f  %10.4f\n" % (sc,T[15],T[17]))
 
 #/************************************************************/
 #/* Module 6.  Calculate Integral of sin(x)*cos(x) from 0.0  */
@@ -440,7 +439,7 @@ def main():
    v = 0.0#                                        /*********************/
 
    dtime(TimeArray)
-   for i in xrange(1, m):
+   for i in range(1, m):
       u = i * x
       w = u * u
       v = u * ((((((A6*w+A5)*w+A4)*w+A3)*w+A2)*w+A1)*w+one)
@@ -463,7 +462,7 @@ def main():
 #						  /*   DO NOT REMOVE   */
 #						  /*   THIS PRINTOUT!  */
 #						  /*********************/
-   print "     6   %13.4e  %10.4f  %10.4f\n" % (sc,T[18],T[20])
+   print ("     6   %13.4e  %10.4f  %10.4f\n" % (sc,T[18],T[20]))
 
 
 #/*******************************************************/
@@ -483,7 +482,7 @@ def main():
    v = sa / m
 
    dtime(TimeArray)
-   for i in xrange(1, m):
+   for i in range(1, m):
       x = i * v
       u = x * x
       s = s - w / ( x + w ) - x / ( u + w ) - u / ( x * u + w )
@@ -498,8 +497,8 @@ def main():
    sa = -w - w / ( x + w ) - x / ( u + w ) - u / ( x * u + w )
    sa = 18.0 * v * (sa + two * s )
 
-   m  = -2000 * long(sa)
-   m = long( m / scale )
+   m  = -2000 * int(sa)
+   m = int( m / scale )
 
    sc = sa + 500.2
    T[23] = one / T[22]
@@ -507,7 +506,7 @@ def main():
 #						  /*  DO NOT REMOVE   */
 #						  /*  THIS PRINTOUT!  */
 #						  /********************/
-   print "     7   %13.4e  %10.4f  %10.4f\n" % (sc,T[21],T[23])
+   print ("     7   %13.4e  %10.4f  %10.4f\n" % (sc,T[21],T[23]))
 
 #/************************************************************/
 #/* Module 8.  Calculate Integral of sin(x)*cos(x)*cos(x)    */
@@ -524,7 +523,7 @@ def main():
    v = 0.0#                                        /*********************/
 
    dtime(TimeArray)
-   for i in xrange(1, m):
+   for i in range(1, m):
       u = i * x
       w = u * u
       v = w*(w*(w*(w*(w*(B6*w+B5)+B4)+B3)+B2)+B1)+one
@@ -547,7 +546,7 @@ def main():
 #						  /*   DO NOT REMOVE   */
 #						  /*   THIS PRINTOUT!  */
 #						  /*********************/
-   print "     8   %13.4e  %10.4f  %10.4f\n" % (sc,T[24],T[26])
+   print ("     8   %13.4e  %10.4f  %10.4f\n" % (sc,T[24],T[26]))
 
 #/**************************************************/   
 #/* MFLOPS(1) output. This is the same weighting   */
@@ -581,13 +580,13 @@ def main():
    T[34] = one / T[33]
 
 
-   print "\n"
-   print "   Iterations      = %10d\n" % m
-   print "   NullTime (usec) = %10.4f\n" % nulltime
-   print "   MFLOPS(1)       = %10.4f\n" % T[28]
-   print "   MFLOPS(2)       = %10.4f\n" % T[30]
-   print "   MFLOPS(3)       = %10.4f\n" % T[32]
-   print "   MFLOPS(4)       = %10.4f\n\n" % T[34]
+   print ("\n")
+   print ("   Iterations      = %10d\n" % m)
+   print ("   NullTime (usec) = %10.4f\n" % nulltime)
+   print ("   MFLOPS(1)       = %10.4f\n" % T[28])
+   print ("   MFLOPS(2)       = %10.4f\n" % T[30])
+   print ("   MFLOPS(3)       = %10.4f\n" % T[32])
+   print ("   MFLOPS(4)       = %10.4f\n\n" % T[34])
 
 if __name__ == "__main__":
    main()
