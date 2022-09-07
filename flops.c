@@ -21,7 +21,7 @@
    25% FDIV's) so that the range of performance can be obtained when
    using FDIV's. FDIV's, being computationally more intensive than
    FADD's or FMUL's, can impact performance considerably on some systems.
-   
+
    Flops.c consists of 8 independent modules (routines) which, except for
    module 2, conduct numerical integration of various functions. Module
    2, estimates the value of pi based upon the Maclaurin series expansion
@@ -32,15 +32,15 @@
    The MFLOPS(1) result is identical to the result provided by all
    previous versions of flops.c. It is based only upon the results from
    modules 2 and 3. Two problems surfaced in using MFLOPS(1). First, it
-   was difficult to completely 'vectorize' the result due to the 
+   was difficult to completely 'vectorize' the result due to the
    recurrence of the 's' variable in module 2. This problem is addressed
    in the MFLOPS(2) result which does not use module 2, but maintains
    nearly the same weighting of FDIV's (9.2%) as in MFLOPS(1) (9.6%).
    The second problem with MFLOPS(1) centers around the percentage of
    FDIV's (9.6%) which was viewed as too high for an important class of
    problems. This concern is addressed in the MFLOPS(3) result where NO
-   FDIV's are conducted at all. 
-   
+   FDIV's are conducted at all.
+
    The number of floating-point instructions per iteration (loop) is
    given below for each module executed:
 
@@ -53,18 +53,18 @@
      6       13      0     16      0      29   0.0%  FDIV's
      7        3      3      3      3      12   25.0% FDIV's
      8       13      0     17      0      30   0.0%  FDIV's
-   
+
    A*2+3     21     12     14      5      52   A=5, MFLOPS(1), Same as
 	   40.4%  23.1%  26.9%  9.6%          previous versions of the
 						flops.c program. Includes
 						only Modules 2 and 3, does
 						9.6% FDIV's, and is not
 						easily vectorizable.
-   
+
    1+3+4     58     14     66     14     152   A=4, MFLOPS(2), New output
    +5+6+    38.2%  9.2%   43.4%  9.2%          does not include Module 2,
    A*7                                         but does 9.2% FDIV's.
-   
+
    1+3+4     62      5     74      5     146   A=0, MFLOPS(3), New output
    +5+6+    42.9%  3.4%   50.7%  3.4%          does not include Module 2,
    7+8                                         but does 3.4% FDIV's.
@@ -74,7 +74,7 @@
 						and does NO FDIV's.
 
    NOTE: Various timer routines are included as indicated below. The
-	timer routines, with some comments, are attached at the end 
+	timer routines, with some comments, are attached at the end
 	of the main program.
 
    NOTE: Please do not remove any of the printouts.
@@ -82,8 +82,8 @@
    EXAMPLE COMPILATION:
    UNIX based systems
        cc -DUNIX -O flops.c -o flops
-       cc -DUNIX -DROPT flops.c -o flops 
-       cc -DUNIX -fast -O4 flops.c -o flops 
+       cc -DUNIX -DROPT flops.c -o flops
+       cc -DUNIX -fast -O4 flops.c -o flops
        .
        .
        .
@@ -228,10 +228,10 @@ int main( int argc, char** argv ) {
 /*************************/
 /* Initialize the timer. */
 /*************************/
-   
+
    dtime(TimeArray);
    dtime(TimeArray);
-   
+
 /*******************************************************/
 /* Module 1.  Calculate integral of df(x)/f(x) defined */
 /*            below.  Result is ln(f(1)). There are 14 */
@@ -556,8 +556,8 @@ int main( int argc, char** argv ) {
 						  /*********************/
 						  /* Module 7 Results  */
 						  /*********************/
-   T[22] = T[21] / 12.0;                                  
-   x  = sa;                                      
+   T[22] = T[21] / 12.0;
+   x  = sa;
    u  = x * x;
    sa = -w - w / ( x + w ) - x / ( u + w ) - u / ( x * u + w );
    sa = 18.0 * v * (sa + two * s );
@@ -615,34 +615,34 @@ int main( int argc, char** argv ) {
 						  /*********************/
    printf("     8   %13.4e  %10.4f  %10.4f\n",sc,T[24],T[26]);
 
-/**************************************************/   
+/**************************************************/
 /* MFLOPS(1) output. This is the same weighting   */
 /* used for all previous versions of the flops.c  */
 /* program. Includes Modules 2 and 3 only.        */
-/**************************************************/ 
+/**************************************************/
    T[27] = ( five * (T[6] - T[5]) + T[9] ) / 52.0;
    T[28] = one  / T[27];
 
-/**************************************************/   
+/**************************************************/
 /* MFLOPS(2) output. This output does not include */
 /* Module 2, but it still does 9.2% FDIV's.       */
-/**************************************************/ 
+/**************************************************/
    T[29] = T[2] + T[9] + T[12] + T[15] + T[18];
    T[29] = (T[29] + four * T[21]) / 152.0;
    T[30] = one / T[29];
 
-/**************************************************/   
+/**************************************************/
 /* MFLOPS(3) output. This output does not include */
 /* Module 2, but it still does 3.4% FDIV's.       */
-/**************************************************/ 
+/**************************************************/
    T[31] = T[2] + T[9] + T[12] + T[15] + T[18];
    T[31] = (T[31] + T[21] + T[24]) / 146.0;
    T[32] = one / T[31];
 
-/**************************************************/   
+/**************************************************/
 /* MFLOPS(4) output. This output does not include */
 /* Module 2, and it does NO FDIV's.               */
-/**************************************************/ 
+/**************************************************/
    T[33] = (T[9] + T[12] + T[18] + T[24]) / 91.0;
    T[34] = one / T[33];
 
@@ -676,7 +676,7 @@ int main( int argc, char** argv ) {
 /* double RunTime, TimeArray[3];                     */
 /* main()                                            */
 /* {                                                 */
-/* dtime(TimeArray);                                 */ 
+/* dtime(TimeArray);                                 */
 /* [routine to time]                                 */
 /* dtime(TimeArray);                                 */
 /* RunTime = TimeArray[1];                           */
@@ -712,7 +712,7 @@ double p[];
 
  p[2] = ( (double)(tt.ticks + (tt.minutes * 60L * 50L)) ) / (double)HZ;
  p[1] = p[2] - q;
-	
+
  return 0;
 }
 #endif
@@ -724,7 +724,7 @@ double p[];
 /*****************************************************/
 #ifdef UNIX
 #include <sys/time.h>
-#include <sys/resource.h>
+#include "resource.h"
 
 #ifdef hpux
 #include <sys/syscall.h>
@@ -733,21 +733,6 @@ double p[];
 
 struct rusage rusage;
 
-int dtime(p)
-double p[];
-{
- double q;
-
- q = p[2];
-
- getrusage(RUSAGE_SELF,&rusage);
-
- p[2] = (double)(rusage.ru_utime.tv_sec);
- p[2] = p[2] + (double)(rusage.ru_utime.tv_usec) * 1.0e-06;
- p[1] = p[2] - q;
-	
- return 0;
-}
 #endif
 
 /***************************************************/
@@ -777,7 +762,7 @@ double p[];
 
  p[2] = (double)(tms.tms_utime) / (double)HZ;
  p[1] = p[2] - q;
-	
+
  return 0;
 }
 #endif
@@ -815,7 +800,7 @@ double p[];
 
  p[2] = (double)(tms.proc_user_time) / (double)HZ;
  p[1] = p[2] - q;
-	
+
  return 0;
 }
 #endif
@@ -844,7 +829,7 @@ double p[];
  p[2] = p[2] + (double)(tnow.ti_sec);
  p[2] = p[2] + (double)(tnow.ti_hund)/(double)HZ;
  p[1] = p[2] - q;
-	
+
  return 0;
 }
 #endif
@@ -870,7 +855,7 @@ double p[];
 
  p[2] = (double)tnow / (double)HZ;
  p[1] = p[2] - q;
-	
+
  return 0;
 }
 #endif
@@ -892,7 +877,7 @@ double p[];
 
  p[2] = (double)clock() / (double)HZ;
  p[1] = p[2] - q;
-	
+
  return 0;
 }
 #endif
@@ -913,7 +898,7 @@ double p[];
 
   p[2] = dclock();
   p[1] = p[2] - q;
-	
+
   return 0;
 }
 #endif
@@ -936,7 +921,7 @@ double p[];
  second(&v);
  p[2] = v;
  p[1] = p[2] - q;
-	
+
  return 0;
 }
 #endif
@@ -1009,7 +994,7 @@ double p[];
 
  p[2] = (double)(rusage.tms_utime) * 1.0e-06;
  p[1] = p[2] - q;
-	
+
  return 0;
 }
 #endif
@@ -1053,7 +1038,7 @@ double p[];
     if ( _atexit( &Remove_timer ) == 0 ) mgrInited = TRUE;
     mgrClock = 0.0;
    }
-	
+
  p[1] = mgrClock - p[2];
  p[2] = mgrClock;
  if ( mgrInited ) {
@@ -1084,39 +1069,6 @@ double p[];
  p[2] = (double) (TimeNowHigh()) / (double) CLK_TCK_HIGH;
  p[1] = p[2] - q;
 
- return 0;
-}
-#endif
-
-/************************************************/
-/*  Sun Solaris POSIX dtime() routine           */
-/*  Provided by: Case Larsen, CTLarsen@lbl.gov  */
-/************************************************/
-#ifdef POSIX
-#include <sys/time.h>
-#include <sys/resource.h>
-#include <sys/rusage.h>
-
-#ifdef __hpux
-#include <sys/syscall.h>
-#define getrusage(a,b) syscall(SYS_getrusage,a,b)
-#endif
-
-struct rusage rusage;
-
-dtime(p)
-double p[];
-{
- double q;
-
- q = p[2];
-
- getrusage(RUSAGE_SELF,&rusage);
-
- p[2] = (double)(rusage.ru_utime.tv_sec);
- p[2] = p[2] + (double)(rusage.ru_utime.tv_nsec) * 1.0e-09;
- p[1] = p[2] - q;
-	
  return 0;
 }
 #endif
