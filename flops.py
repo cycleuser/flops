@@ -8,7 +8,7 @@
 #/*****************************/
 
 __author__ = 'Brian Olson'
-
+# modified by CycleUser
 """
 /*
    Flops.c is a 'c' program which attempts to estimate your systems
